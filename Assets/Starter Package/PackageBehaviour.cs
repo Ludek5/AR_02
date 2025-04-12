@@ -18,9 +18,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
- * Used in <see cref="CarBehaviour"/> to determine a collision with a package. 
- */
 public class PackageBehaviour : MonoBehaviour
 {
+    private GameController gameController;
+
+    void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            gameController.AddScore(1);  // Aumentar puntaje
+            Destroy(gameObject);        // Destruir el paquete
+        }
+    }
 }
